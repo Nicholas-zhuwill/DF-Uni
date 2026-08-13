@@ -787,6 +787,10 @@
   .field input:focus{border-color:var(--green);box-shadow:0 0 0 2px rgba(0,230,118,.15)}
   .field .tip{font-size:11px;color:var(--dim);margin-top:6px;line-height:1.6}
   .field .tip a{color:var(--green);cursor:pointer}
+  .verify-code-row{display:grid;grid-template-columns:1fr 126px;gap:10px;align-items:stretch}
+  .verify-code-row .btn-code{padding:0 10px;border:1px solid var(--green);background:rgba(0,230,118,.08);color:var(--green);font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap;transition:.2s}
+  .verify-code-row .btn-code:hover:not(:disabled){background:rgba(0,230,118,.16)}
+  .verify-code-row .btn-code:disabled{border-color:var(--line);color:var(--dim);cursor:not-allowed;background:transparent}
 
   /* loading */
   .loading-wrap{text-align:center;padding:30px 0}
@@ -841,30 +845,6 @@
   .joined-banner .ck{font-size:30px;color:var(--green)}
   .joined-banner h4{font-size:17px;font-weight:900;color:#fff;margin:8px 0 4px}
   .joined-banner p{font-size:12px;color:var(--muted)}
-
-  /* 上传通知书 */
-  .upload-zone{
-    border:2px dashed var(--green-line);background:var(--panel2);
-    padding:34px 20px;text-align:center;cursor:pointer;transition:.2s;margin-bottom:14px;
-    clip-path:var(--clip-sm);
-  }
-  .upload-zone:hover{border-color:var(--green);background:rgba(0,230,118,.05)}
-  .upload-zone .up-ico{font-size:34px;margin-bottom:10px}
-  .upload-zone p{font-size:13px;color:var(--muted)}
-  .upload-zone p b{color:var(--green)}
-  .upload-preview{
-    display:none;border:1px solid var(--green-line);background:var(--panel2);
-    padding:14px;margin-bottom:14px;clip-path:var(--clip-sm);
-  }
-  .upload-preview.show{display:flex;gap:14px;align-items:center;animation:fadeIn .3s}
-  .upload-preview .thumb{
-    width:64px;height:80px;flex-shrink:0;
-    background:linear-gradient(160deg,#fff,#e8f5ec);
-    display:grid;place-items:center;font-size:11px;color:#c0392b;font-weight:900;
-    border:2px solid #c0392b;text-align:center;line-height:1.3;padding:4px;
-  }
-  .upload-preview .fn{font-size:13px;color:#fff;font-weight:700}
-  .upload-preview .fs{font-size:11px;color:var(--green);margin-top:4px}
 
   /* AI 识别结果 */
   .ai-result{border:1px solid var(--green-line);background:var(--panel2);padding:18px;margin-bottom:14px;clip-path:var(--clip-sm)}
@@ -1179,7 +1159,8 @@
     animation:actTicker 32s linear infinite;white-space:nowrap;padding-left:20px;
   }
   .act-topbanner-track:hover{animation-play-state:paused}
-  .act-topbanner .it{color:var(--text);font-size:12px;font-weight:600}
+  .act-topbanner .it{color:var(--text);font-size:12px;font-weight:600;cursor:pointer}
+  .act-topbanner .it:hover{color:var(--green)}
   .act-topbanner .it .tg{color:var(--orange);font-weight:900;margin-right:8px}
   .act-topbanner .it .gn{color:var(--green);font-weight:900;margin:0 6px}
   @keyframes actTicker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -1431,21 +1412,9 @@
 
 <!-- ==================== 高校活动（第二页） ==================== -->
 <section class="activity" id="activity">
-  <!-- 已认证态：顶部滚动 banner -->
-  <div class="act-topbanner" id="actTopBanner">
-    <div class="act-topbanner-track">
-      <span class="it"><span class="tg">🔥 进行中</span>全面打洲杯 · 高校启幕战 <span class="gn">立即报名 →</span></span>
-      <span class="it"><span class="tg">🎁 限时</span>阿萨拉暖冬派对 · 现场福袋派送 <span class="gn">查看详情 →</span></span>
-      <span class="it"><span class="tg">🏆 火热</span>高校之巅 · 王不见王总决赛 <span class="gn">观赛入口 →</span></span>
-      <span class="it"><span class="tg">⚡ 招募</span>校园大使 · 打洲祭校园行 <span class="gn">申请入口 →</span></span>
-      <span class="it"><span class="tg">📸 打卡</span>coser 招募 · 打洲杯周边 <span class="gn">领取福利 →</span></span>
-      <!-- 复制一份保证无缝滚动 -->
-      <span class="it"><span class="tg">🔥 进行中</span>全面打洲杯 · 高校启幕战 <span class="gn">立即报名 →</span></span>
-      <span class="it"><span class="tg">🎁 限时</span>阿萨拉暖冬派对 · 现场福袋派送 <span class="gn">查看详情 →</span></span>
-      <span class="it"><span class="tg">🏆 火热</span>高校之巅 · 王不见王总决赛 <span class="gn">观赛入口 →</span></span>
-   <span class="it"><span class="tg">⚡ 招募</span>校园大使 · 打洲祭校园行 <span class="gn">申请入口 →</span></span>
-      <span class="it"><span class="tg">📸 打卡</span>coser 招募 · 打洲杯周边 <span class="gn">领取福利 →</span></span>
-    </div>
+  <!-- 顶部高校活动名称跑马灯：与活动轮播共用 ActivityPage.openDetail 跳转 -->
+  <div class="act-topbanner on" id="actTopBanner">
+    <div class="act-topbanner-track" id="actTopBannerTrack"></div>
   </div>
 
   <div class="sec-head">
@@ -1505,9 +1474,8 @@
     <!-- 高校活动右侧面板（认证前/后统一样式） -->
   <div class="act-right" id="actRightAuthed" style="display:flex">
     <div class="act-right-inner">
-   <span class="act-right-tag">CAMPUS EVENTS · 全国最新活动</span>
+   <span class="act-right-tag">CAMPUS EVENTS · 全国最新高校活动</span>
       <div class="act-right-title" style="font-size:22px">正在进行 · <em>重点关注</em></div>
-      <div class="act-right-desc" style="max-width:none">从全国 <b style="color:var(--green)">32 项</b> 进行中的高校活动里挑选出 <b style="color:var(--orange)">4 项</b> 最值得关注的，点击任一项查看详情与报名。</div>
  <div class="act-list" id="actList">
         <div class="act-list-item" onclick="ActivityPage.openDetail(0)">
      <div class="act-list-thumb" data-act-img="act1"></div>
@@ -1569,7 +1537,6 @@
       <div class="panel">
         <h3>本校数据</h3>
         <div class="school-name">武汉理工大学 · 打洲社</div>
-        <div class="school-sub">击败榜 <b>#5</b> · 收益榜 <b>#8</b> · 全面战场积分 <b>#12</b></div>
         <div class="honor-grid" aria-label="高校荣誉名片">
           <div class="honor-card society-tier-cell" data-members="3000"><div class="hc-ico">🏆</div><div class="hc-l">本校打洲社荣誉</div><div class="hc-v" id="schoolTierValue">巅峰打洲社</div><div class="hc-d" id="schoolTierDesc">最高荣誉档位</div></div>
           <div class="honor-card"><div class="hc-ico">💥</div><div class="hc-l">高校击败榜</div><div class="hc-v">#5</div><div class="hc-d">▲ 上升 2 位</div></div>
@@ -1688,16 +1655,11 @@
     <!-- STEP: 身份选择 -->
     <div class="step" data-step="identity">
       <div class="m-title">选择你的身份</div>
-      <div class="m-sub">两条认证通道，认证通过后权益完全一致</div>
+        <div class="m-sub">仅保留在校生认证通道，认证通过后权益完全一致</div>
       <div class="id-cards">
         <button class="id-card" onclick="AuthFlow.go('qr')">
           <div class="ico">🎓</div>
           <div><h4>我是在校生</h4><p>手机端学信网授权 · 身份信息匹配核验</p></div>
-          <span class="go">→</span>
-        </button>
-        <button class="id-card orange" onclick="AuthFlow.go('upload')">
-          <div class="ico">📜</div>
-          <div><h4>我是准大学生</h4><p>高考已录取未入学 · 录取通知书认证</p></div>
           <span class="go">→</span>
         </button>
       </div>
@@ -1719,24 +1681,32 @@
     <div class="step" data-step="matching">
       <span class="back-link" onclick="AuthFlow.go('qr')">← 上一步</span>
       <div class="m-title">填写身份信息</div>
-      <div class="m-sub">为确保是本人在操作，系统会将以下信息与你在手机端完成的学信网认证结果进行匹配</div>
+      <div class="m-sub">DEMO 演示页面：本页仅展示认证流程，字段内容、格式和验证码均不做校验，点击提交即可进入下一环节</div>
       <div class="field">
         <label>真实姓名</label>
         <input type="text" id="realName" placeholder="与学信网/身份证一致的姓名" />
       </div>
       <div class="field">
-        <label>身份证号（后 6 位）</label>
-        <input type="text" id="idLast6" placeholder="仅输入后 6 位用于匹配" maxlength="6" />
-        <div class="tip">仅需输入后 6 位，无需提供完整身份证号，保护你的隐私</div>
+        <label>身份证号（完整）</label>
+        <input type="text" id="idNumber" inputmode="numeric" placeholder="请输入 18 位身份证号" maxlength="18" autocomplete="off" />
+        <div class="tip">DEMO 演示：本页不校验真实身份格式，填写任意内容即可继续</div>
       </div>
       <div class="field">
         <label>手机号</label>
-        <input type="text" id="phone" placeholder="用于接收认证结果通知" maxlength="11" />
+        <input type="tel" id="phone" inputmode="numeric" placeholder="请输入 11 位手机号" maxlength="11" autocomplete="off" />
       </div>
       <div class="field">
-        <label>所在学校</label>
-        <input type="text" id="schoolName" placeholder="例如：武汉理工大学" />
-        <div class="tip">请填写与学信网学籍信息一致的学校全称</div>
+        <label>短信验证码</label>
+        <div class="verify-code-row">
+          <input type="text" id="smsCode" inputmode="numeric" placeholder="请输入短信验证码" maxlength="6" autocomplete="one-time-code" />
+          <button type="button" class="btn-code" id="sendCodeBtn" onclick="AuthFlow.sendSmsCode()">获取验证码</button>
+        </div>
+        <div class="tip" id="smsCodeTip">DEMO 演示：验证码按钮仅作流程展示，填写任意内容即可继续</div>
+      </div>
+      <div class="field">
+        <label>所在高校</label>
+        <input type="text" id="schoolName" placeholder="例如：武汉理工大学" autocomplete="organization" />
+        <div class="tip">DEMO 演示：填写任意高校名称或内容即可继续</div>
       </div>
       <button class="btn-primary" onclick="AuthFlow.submitIdentity()">提交匹配 · 核验身份</button>
     </div>
@@ -1763,148 +1733,55 @@
         <div class="settle-head">
           <div class="settle-head-l">
             <span class="settle-tag">最后一步</span>
-            <h4>完成 2 项可领更多入社礼</h4>
+            <h4>登录小程序领取认证奖励</h4>
           </div>
-          <div class="settle-counter" id="settleCounter">0 / 2</div>
+          <div class="settle-counter" id="settleCounter">0 / 1</div>
         </div>
 
-        <!-- DEMO：学校状态切换，让产品能完整看到两条路径 -->
-        <div class="school-state-toggle" id="schoolStateToggle">
-          <button data-state="has" class="active" onclick="AuthFlow.setSchoolState('has')">本校已有打洲社</button>
-          <button data-state="none" onclick="AuthFlow.setSchoolState('none')">本校暂未成立打洲社</button>
-        </div>
-
-        <!-- 任务 1：加本校打洲社QQ群 / 填问卷→审核→加入社长群 -->
+        <!-- 任务 1：本校打洲社群信息展示 -->
         <div class="task-card" id="task1">
           <div class="task-num">1</div>
           <div class="task-status"><span class="ck-ico">✓</span>已完成</div>
           <div class="task-body">
             <div class="task-qr" id="qrGroup"></div>
             <div class="task-info">
-              <!-- 状态 A：本校已有打洲社 -->
-              <div class="task-state-panel active" data-state="has">
-                <h5>加入本校打洲社 QQ 群</h5>
-                <p><b>武理工 · 打洲社官方群</b><br>群号：876543210 · 已有 2,341 名校友<br>组队开黑 / 赛事报名 / 群内每日礼包</p>
-                <button class="btn-orange" onclick="AuthFlow.completeTask(1)">加入 QQ 群 →</button>
-              </div>
-              <!-- 状态 B：本校暂未成立打洲社 · 招募社长 -->
-              <div class="task-state-panel" data-state="none">
-                <h5>本校暂未成立打洲社 · 招募社长</h5>
-                <p>你愿意成为本校<span class="hl">首位打洲社社长</span>吗？<br>填写申请问卷 → 人工审核 → 加入打洲社社长群<br>享受<span class="hl">社长专属礼包 + 校园运营经费</span></p>
-                <button class="btn-orange" onclick="AuthFlow.go('survey')">填写问卷 · 成为社长 →</button>
-                <div class="task-link-row">
-                  <span class="lk">问卷链接</span>
-                  <a class="task-link" href="javascript:;" onclick="AuthFlow.go('survey')">wj.qq.com/s2/1234567 · 三角洲打洲社社长招募</a>
-                </div>
+              <h5>本校打洲社 QQ 群</h5>
+              <p><b>武理工 · 打洲社官方群</b><br>群号：876543210 · 已有 2,341 名校友<br>组队开黑 / 赛事报名 / 群内每日礼包</p>
+              <div class="task-link-row">
+                <span class="lk">群信息展示</span>
+                <span class="task-link" style="cursor:default">群二维码及群号仅作展示，不在此处操作</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- 任务 2：关注「打洲社」小程序（无论 A/B 都需完成） -->
+        <!-- 任务 2：登录小程序领取认证奖励 -->
         <div class="task-card" id="task2">
           <div class="task-num">2</div>
           <div class="task-status"><span class="ck-ico">✓</span>已完成</div>
           <div class="task-body">
             <div class="task-qr" id="qrMp"></div>
             <div class="task-info">
-              <h5>关注「打洲社」小程序</h5>
-              <div class="mp-anno"><span class="mp-anno-ico">🎁</span><div><b>首次使用小程序即可领新人奖励</b><br>奖励在小程序内发放，奖励池与开服同步更新</div></div>
-              <p>打洲社 · 微信小程序<br>本校限时榜单 / 找搭子 / 赛事报名 / 社长任务台<br>关注后可接收本校榜单排名与赛事开赛提醒</p>
-              <button class="btn-orange" onclick="AuthFlow.completeTask(2)">关注小程序 →</button>
+              <h5>登录「打洲社」小程序</h5>
+              <div class="mp-anno"><span class="mp-anno-ico">🎁</span><div><b>登录小程序即可领取认证奖励</b><br>认证奖励将在小程序内领取，奖励池与开服同步更新</div></div>
+              <p>扫码登录打洲社微信小程序<br>登录后进入认证奖励页面，即可领取本次高校认证奖励</p>
+              <button class="btn-orange" onclick="AuthFlow.completeTask(1)">去小程序领取认证奖励 →</button>
             </div>
           </div>
         </div>
 
-        <div class="demo-note">DEMO 演示：点击按钮或扫码均可模拟完成；两项均完成后发放入社礼。点击上方状态切换可查看「本校暂未成立打洲社」分支</div>
+        <div class="demo-note">DEMO 演示：群信息仅作展示；点击“去小程序领取认证奖励”模拟登录小程序并完成领取。</div>
       </div>
 
-      <!-- 沉淀完成：2 项任务全部完成时显示（图2 样式） -->
+      <!-- 小程序领取完成时显示 -->
       <div class="settle-done" id="settleDone">
         <div class="ck-big">✓</div>
-        <h3>沉淀完成 · 入社礼已发放</h3>
-        <p>已加入本校打洲社群，并关注「打洲社」小程序<br>后续本校榜单排名、赛事开赛、福利发放都会通过这两个渠道通知你</p>
+        <h3>领取完成 · 认证奖励已到账</h3>
+        <p>已登录「打洲社」小程序并完成认证奖励领取<br>后续本校活动、榜单与福利信息将在小程序内同步</p>
         <button class="btn-primary" onclick="AuthFlow.close()">完成 · 进入打洲社 →</button>
       </div>
     </div>
 
-    <!-- STEP: 上传通知书（新生） — 已废弃，仅保留学信网在线认证 -->
-    <!-- STEP: 社长招募问卷填写（本校未成立打洲社 → 方案3） -->
-    <div class="step" data-step="survey">
-      <span class="back-link" onclick="AuthFlow.go('success')">← 返回沉淀阶段</span>
-      <div class="m-title">打洲社社长 · 申请问卷</div>
-      <div class="m-sub">本校暂未成立打洲社，欢迎你成为本校首位社长。填写下方问卷，工作人员将在 <b>3 个工作日</b>内完成审核。</div>
-
-      <div class="survey-link-card">
-        <div class="lk-l">问卷链接（也可直接复制填写）</div>
-        <a href="javascript:;" onclick="return false">wj.qq.com/s2/1234567 · 三角洲打洲社社长招募</a>
-      </div>
-
-      <div class="survey-block">
-        <div class="ai-head">✦ 申请人信息</div>
-        <div class="field">
-          <label>姓名</label>
-          <input type="text" value="张三" />
-        </div>
-        <div class="field">
-          <label>学校 / 学院 / 年级</label>
-          <input type="text" value="武汉理工大学 · 计算机学院 · 大一" />
-        </div>
-        <div class="field">
-          <label>联系方式（微信 / QQ / 手机号）</label>
-          <input type="text" value="138 0013 8000" />
-        </div>
-        <div class="field">
-          <label>游戏内 ID / 区服</label>
-          <input type="text" value="洲同学#2871 · 微信区" />
-        </div>
-        <div class="field" style="margin-bottom:0">
-          <label>为什么想成为本校打洲社社长？（100 字以上）</label>
-          <textarea placeholder="工作人员会基于你的校园资源、过往社群运营经验、对《三角洲行动》的理解进行评估。"></textarea>
-          <div class="tip">DEMO：随便填写即可，无需真实信息</div>
-        </div>
-      </div>
-
-      <button class="btn-primary" onclick="AuthFlow.go('surveyReview')">提交问卷 · 进入人工审核</button>
-      <button class="btn-ghost" onclick="AuthFlow.go('success')">暂不申请 · 返回</button>
-    </div>
-
-    <!-- STEP: 问卷审核中 -->
-    <div class="step" data-step="surveyReview">
-      <div class="review-status">
-        <div class="review-badge">⏳</div>
-        <h3>社长申请 · 审核中</h3>
-        <p>你的问卷已提交，工作人员正在评估你的校园资源、运营能力与对《三角洲行动》的理解</p>
-        <div class="eta">预计 3 个工作日内反馈 · 结果将通过微信服务通知告知</div>
-      </div>
-      <button class="btn-primary" onclick="AuthFlow.go('founderJoin')">模拟审核通过 →</button>
-      <button class="btn-ghost" onclick="AuthFlow.go('survey')">返回修改问卷</button>
-      <div class="demo-note">DEMO 演示：点击模拟审核通过，进入加社长群环节</div>
-    </div>
-
-    <!-- STEP: 加入社长群（审核通过） -->
-    <div class="step" data-step="founderJoin">
-      <div class="success-wrap" style="padding-top:0">
-        <div class="success-badge">✓</div>
-        <h3>社长申请 · 审核通过</h3>
-        <div class="sch">🎓 武汉理工大学 · 首位打洲社社长</div>
-        <p>欢迎加入打洲社社长团！请扫码加入「三角洲打洲社社长群」</p>
-      </div>
-      <div class="join-block" id="founderJoinBlock">
-        <h4>加入 · 三角洲打洲社社长群</h4>
-        <div class="join-grid">
-          <div class="qr-mini" id="qrFounder"></div>
-          <div class="join-info">
-            <p><b>三角洲 · 打洲社社长官方群</b><br>群号：888123456 · 已有 1,128 位社长<br>社长培训 / 校园运营经费 / 招新物料 / 月度激励</p>
-            <button class="btn-orange" style="padding:11px" onclick="AuthFlow.founderJoined()">点击加入社长群 →</button>
-          </div>
-        </div>
-        <button class="btn-ghost" onclick="AuthFlow.founderJoined()">已通过扫码加群 · 点击模拟完成</button>
-        <div class="demo-note">DEMO 演示：以上两种方式均可模拟加入社长群</div>
-      </div>
-    </div>
-
-    <!-- STEP: 人工审核中（录取通知书） — 已废弃 -->
 
   </div>
 </div>
@@ -1938,7 +1815,6 @@ function makeQR(container,size){
 makeQR(document.getElementById('qrMain'),21);
 makeQR(document.getElementById('qrGroup'),15);
 makeQR(document.getElementById('qrMp'),15);
-makeQR(document.getElementById('qrFounder'),15);
 makeQR(document.getElementById('qrMiniProgram'),15);
 makeQR(document.getElementById('qrMpHero'),15);
 
@@ -2028,10 +1904,10 @@ const Session=(()=>{
     var actTop=document.getElementById('actTopBanner');
     var actSub=document.getElementById('actSubDesc');
     if(actTop){
-      actTop.classList.toggle('on',isAuthed);
+      actTop.classList.add('on');
       if(actSub) actSub.textContent=isAuthed
-        ? '全国正在进行 32 项高校活动 · 上方为最新战报，右侧列出当前最值得关注的 4 项 · 点击查看详情'
-        : '全国 500+ 高校打洲社正在联合举办 —— 校园赛、观赛集会、打洲杯高校巡回，右侧为当前 4 项重点活动，完成认证后可一键报名。';
+        ? '全国正在进行 32 项高校活动 · 点击顶部活动名称或活动卡片查看详情与报名'
+        : '全国 500+ 高校打洲社正在联合举办 —— 点击顶部活动名称或活动卡片查看详情，完成认证后可报名。';
     }
     // 入口卡片上的平台绑定提示
     if(entryPlatformTag){
@@ -2051,7 +1927,7 @@ const Session=(()=>{
     if(state.loggedIn){
       var pTag=state.platform==='qq'?'QQ':'微信';
       userChipText.textContent='洲同学 · '+(state.authed?'已认证 · ':'已绑定 ')+pTag;
-      navBtn.textContent=state.authed?'我的权益':'立即认证 →';
+      navBtn.textContent=state.authed?'我的打洲社':'立即认证 →';
     }else{
       navBtn.textContent='登录';
     }
@@ -2346,6 +2222,20 @@ var count=track.querySelectorAll('.act-slide').length;
   }
   function stopAuto(){ if(timer){clearInterval(timer); timer=null;} }
 
+  function renderTopBanner(){
+    var wrap=document.getElementById('actTopBannerTrack');
+    if(!wrap) return;
+    wrap.innerHTML='';
+    activities.concat(activities).forEach(function(act,i){
+      var idx=i%activities.length;
+      var item=document.createElement('span');
+      item.className='it';
+      item.innerHTML='<span class="tg">'+(act.tags[0]||'高校活动')+'</span>'+act.title+' <span class="gn">查看详情 →</span>';
+      item.addEventListener('click',function(){openDetail(idx);});
+      wrap.appendChild(item);
+    });
+  }
+
   function openDetail(idx){
 var act=activities[idx];
     if(!act) return;
@@ -2377,6 +2267,7 @@ var act=activities[idx];
   }
 
   function init(){
+    renderTopBanner();
     initCarousel();
     // 认证态活动缩略图注入 background
     document.querySelectorAll('[data-act-img]').forEach(function(el){
@@ -2401,17 +2292,16 @@ const AuthFlow=(()=>{
   const steps=[...modal.querySelectorAll('.step')];
   const stepper=document.getElementById('stepper');
 
-  // 各通道的步骤序列（用于顶部进度条；survey/surveyReview/founderJoin 是 success 的子流程，不进 stepper）
+  // 各通道的步骤序列（用于顶部进度条）
   const sequences={
     student:['identity','qr','matching','checking','success'],
   };
-  // success 之后的子流程（不影响顶部进度）
-  const subflow=new Set(['survey','surveyReview','founderJoin']);
   let track='student';
 
-  // 沉淀阶段任务态
-  const tasks={1:false,2:false};
-  let schoolState='has'; // 'has' 本校已有打洲社 / 'none' 本校暂未成立
+  // 沉淀阶段仅保留小程序领取奖励任务，群信息只作展示
+  const tasks={1:false};
+  let smsSent=false;
+  let smsTimer=null;
 
   function renderStepper(cur){
     const seq=sequences[track];
@@ -2437,8 +2327,7 @@ const AuthFlow=(()=>{
     }
     if(name==='qr'||name==='matching'||name==='checking') track='student';
     steps.forEach(s=>s.classList.toggle('active',s.dataset.step===name));
-    // 子流程不重绘 stepper，保留 success 那一段的高亮
-    if(!subflow.has(name)) renderStepper(name);
+    renderStepper(name);
     modal.querySelector('.modal').scrollTop=0;
     // 进入 qr 步骤时，根据登录平台动态设置文案
     if(name==='qr') updateQrStepText();
@@ -2474,17 +2363,21 @@ const AuthFlow=(()=>{
     }
     modal.classList.add('show');
     document.body.style.overflow='hidden';
-    // 重置任务态
-    tasks[1]=false;tasks[2]=false;
+    // 重置任务态与短信验证码态
+    tasks[1]=false;
+    smsSent=false;
+    if(smsTimer){clearInterval(smsTimer);smsTimer=null;}
     document.querySelectorAll('.task-card').forEach(c=>c.classList.remove('completed'));
     document.getElementById('settlePanel').style.display='block';
     document.getElementById('settleDone').classList.remove('show');
-    document.getElementById('settleCounter').textContent='0 / 2';
+    document.getElementById('settleCounter').textContent='0 / 1';
     document.getElementById('settleCounter').classList.remove('full');
-    // 重置学校状态为「已有」
-    setSchoolState('has',true);
-    ['realName','idLast6','phone','schoolName'].forEach(id=>{
-      const el = document.getElementById(id); if(el) el.value='';
+    const sendBtn=document.getElementById('sendCodeBtn');
+    if(sendBtn){sendBtn.disabled=false;sendBtn.textContent='获取验证码';}
+    const smsTip=document.getElementById('smsCodeTip');
+    if(smsTip) smsTip.textContent='DEMO 演示：验证码按钮仅作流程展示，填写任意内容即可继续';
+    ['realName','idNumber','phone','smsCode','schoolName'].forEach(id=>{
+      const el = document.getElementById(id); if(el){el.value='';el.style.borderColor='';}
     });
     go(channel==='student'?'qr':'identity');
   }
@@ -2494,62 +2387,56 @@ const AuthFlow=(()=>{
     document.body.style.overflow='';
   }
 
+  function sendSmsCode(){
+    const phone=document.getElementById('phone');
+    const btn=document.getElementById('sendCodeBtn');
+    const tip=document.getElementById('smsCodeTip');
+    if(!phone||!btn) return;
+    const value=phone.value.trim();
+    // DEMO 演示：不校验手机号格式，任意内容均可触发验证码流程
+    phone.style.borderColor='';
+    smsSent=true;
+    let left=60;
+    btn.disabled=true;
+    btn.textContent=left+'s 后重发';
+    if(tip) tip.textContent='DEMO 演示：已模拟发送验证码，填写任意内容即可继续';
+    if(smsTimer) clearInterval(smsTimer);
+    smsTimer=setInterval(function(){
+      left-=1;
+      if(left<=0){
+        clearInterval(smsTimer);smsTimer=null;
+        smsSent=false;
+        btn.disabled=false;btn.textContent='重新获取';
+        if(tip) tip.textContent='DEMO 演示：验证码流程已结束，点击重新获取即可';
+      }else{
+        btn.textContent=left+'s 后重发';
+      }
+    },1000);
+  }
+
   function submitIdentity(){
-    const name = document.getElementById('realName').value.trim();
-    const id6 = document.getElementById('idLast6').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const school = document.getElementById('schoolName').value.trim();
-    let ok = true;
-    if(!name) { document.getElementById('realName').style.borderColor='var(--orange)'; ok=false; }
-    else { document.getElementById('realName').style.borderColor=''; }
-    if(!id6 || id6.length < 6) {
-      document.getElementById('idLast6').style.borderColor='var(--orange)';
-      document.getElementById('idLast6').placeholder='请输入身份证后 6 位';
-      ok=false;
-    } else { document.getElementById('idLast6').style.borderColor=''; }
-    if(!phone || phone.length < 11) {
-      document.getElementById('phone').style.borderColor='var(--orange)';
-      document.getElementById('phone').placeholder='请输入 11 位手机号';
-      ok=false;
-    } else { document.getElementById('phone').style.borderColor=''; }
-    if(!school) { document.getElementById('schoolName').style.borderColor='var(--orange)'; ok=false; }
-    else { document.getElementById('schoolName').style.borderColor=''; }
-    if(!ok) return;
+    // DEMO 演示页：不校验字段内容、格式或验证码，点击即可进入下一环节
+    ['realName','idNumber','phone','smsCode','schoolName'].forEach(function(id){
+      const el=document.getElementById(id);
+      if(el) el.style.borderColor='';
+    });
     go('checking');
   }
 
   /* ==================== 沉淀阶段交互 ==================== */
-  function setSchoolState(s, silent){
-    schoolState=s;
-    // toggle 高亮
-    document.querySelectorAll('#schoolStateToggle button').forEach(b=>{
-      b.classList.toggle('active',b.dataset.state===s);
-    });
-    // 任务1 内部状态面板切换
-    document.querySelectorAll('#task1 .task-state-panel').forEach(p=>{
-      p.classList.toggle('active',p.dataset.state===s);
-    });
-    // 切到「本校暂未成立」时，如果 task1 已 done，重置 task1（让用户走完整方案3链路）
-    if(s==='none' && tasks[1]){
-      tasks[1]=false;
-      document.getElementById('task1').classList.remove('completed');
-      updateSettleUI();
-    }
-  }
-
   function completeTask(n){
-    tasks[n]=true;
-    document.getElementById('task'+n).classList.add('completed');
+    if(n!==1) return;
+    tasks[1]=true;
+    document.getElementById('task2').classList.add('completed');
     updateSettleUI();
   }
 
   function updateSettleUI(){
-    const c=(tasks[1]?1:0)+(tasks[2]?1:0);
+    const c=tasks[1]?1:0;
     const counter=document.getElementById('settleCounter');
-    counter.textContent=c+' / 2';
-    if(c===2){
+    counter.textContent=c+' / 1';
+    if(c===1){
       counter.classList.add('full');
-      // 两项完成 → 切换到「沉淀完成」大面板
       document.getElementById('settlePanel').style.display='none';
       document.getElementById('settleDone').classList.add('show');
     }else{
@@ -2559,16 +2446,10 @@ const AuthFlow=(()=>{
     }
   }
 
-  // 方案3：审核通过后加入社长群 → 标记任务1完成 → 回到 success 步骤
-  function founderJoined(){
-    completeTask(1);
-    go('success');
-  }
-
   modal.addEventListener('click',e=>{if(e.target===modal) close();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape') close();});
 
-  return {open,close,go,submitIdentity,setSchoolState,completeTask,founderJoined,updateSettleUI};
+  return {open,close,go,sendSmsCode,submitIdentity,completeTask,updateSettleUI};
 })();
 </script>
 </body>
